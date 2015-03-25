@@ -1,2 +1,2 @@
-# Meetings
-Materiały ze spotkań grupy - prezentacje itp.
+﻿# Spotkania Poznańskiej Grupy .NET
+W tym repozytorium znajdziesz materiały ze spotkań grupy - prezentacje i inne.
