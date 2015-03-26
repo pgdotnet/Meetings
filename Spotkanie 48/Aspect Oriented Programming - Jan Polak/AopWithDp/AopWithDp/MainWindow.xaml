@@ -1,0 +1,54 @@
+﻿<Window x:Class="AopWithDp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:aop="clr-namespace:AopWithDp"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=aop:FormModel, IsDesignTimeCreatable=True}"
+        Title="MainWindow" Height="600" Width="525" FontSize="28">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Width" Value="240"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="32,0,0,0"/>
+            <Setter Property="Background" Value="LightGreen"/>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true" >
+                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="BorderBrush" Value="Red"/>
+                    <Setter Property="BorderThickness" Value="1.0"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self},Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+    <StackPanel Grid.Column="0" Margin="10">
+        <Label Content="Name"/>
+        <TextBox Text="{Binding Name, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"/>
+        <Label Content="Phone"/>
+        <TextBox Text="{Binding Phone, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"/>
+        <Label Content="Email"/>
+        <TextBox Text="{Binding Email, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"/>
+        <Label Content="Address1"/>
+        <TextBox Text="{Binding Address1, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"/>
+        <Label Content="Address2"/>
+        <TextBox Text="{Binding Address2, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"/>
+        <Label Content="Address3"/>
+        <TextBox Text="{Binding Address3, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"/>
+        <Label Content="City"/>
+        <TextBox Text="{Binding City, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"/>
+        <Label Content="Postcode"/>
+        <TextBox Text="{Binding Postcode, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"/>
+    </StackPanel>
+        
+        <Button Grid.Column="1" Content="UNDO" Width="161" Height="100" Command="{Binding UndoCommand}"/>
+    </Grid>
+</Window>

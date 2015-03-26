@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AopWithDp", "AopWithDp\AopWithDp.csproj", "{4C4B80F3-2188-4D00-9CD8-4F4C813CABFF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4C4B80F3-2188-4D00-9CD8-4F4C813CABFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C4B80F3-2188-4D00-9CD8-4F4C813CABFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C4B80F3-2188-4D00-9CD8-4F4C813CABFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C4B80F3-2188-4D00-9CD8-4F4C813CABFF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
