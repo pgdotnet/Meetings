@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Generics - things you should know</title>
+
+		<meta name="description" content="Summary of generics features in .NET framework">
+		<meta name="author" content="Tomasz Kujawa">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<section data-background="img/songohan.jpg">
+						<h1>INSIDE GENERICS</h1>
+					</section>
+					<section data-background="img/xp.jpg">
+						<h2 style="font-family: Consolas; text-transform: none;">c:\> whoami&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+						<h2 class="fragment" style="font-family: Consolas; text-transform: none;">tomasz kujawa&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+						<br/><br/><br/><br/><br/><br/>
+					</section>
+					<section data-background="img/tk.png"></section>
+					<section data-background="img/gft.png"></section>
+					<section data-background="img/csdreams.png"></section>
+					<section data-background="img/aikido.png"></section>
+					<section data-background="white"><img src="img/vs.jpg"/></section>
+				</section>
+				<section data-background="img/behind.jpg">
+				<br/><br/>
+					<blockquote style="text-shadow: 0.1em 0.1em #333">
+						&ldquo;Mind what you have learned. Save you it can.&rdquo;
+					</blockquote>
+				</section>
+				<!-- <section data-background="img/oliver-kahn.jpg">
+					<h1 style="text-shadow: 0.05em 0.05em #333">GENERICS</h1>
+					<h3 style="text-shadow: 0.05em 0.05em #333">Was Sie wissen sollten</h3>
+				</section> -->
+				<section data-background="img/braveheart.jpg">
+					<h1 style="text-shadow: 0.05em 0.08em #333">C# 1.0</h1>
+					<h4 style="text-shadow: 0.05em 0.08em #333">2002</h4>
+					<h3 class="fragment" style="text-shadow: 0.05em 0.08em #333">(aka generic-free world)</h3>
+				</section>
+				<section>
+					<section data-background="img/star_2.jpg">
+						<h2>Other worlds</h2>
+					</section>
+					<section data-background="img/darth-vader.jpeg">
+							<h1>C++</h1>
+							<h3 class="fragment" style="text-shadow: 0.05em 0.05em #333">Templates = macros on steroids</h3>
+							<p class="fragment" style="text-shadow: 0.05em 0.05em #333">compiled into specific versions of used arguments</p>
+							<p class="fragment" style="text-shadow: 0.05em 0.05em #333">arguments don’t have to be type names</p>
+					</section>
+					<section data-background="img/turing.jpg">
+						<h2 style="text-shadow: 0.05em 0.05em #333">template metaprogramming</h2>
+						<pre class="fragment"><code data-trim contenteditable>
+						template &lt;int n>
+struct factorial {
+enum { value = n * factorial&lt;n - 1>::value };
+};
+
+template &lt;>
+struct factorial&lt;0> {
+enum { value = 1 };
+};
+// Usage examples:
+// factorial&lt;0>::value would yield 1;
+// factorial&lt;4>::value would yield 24.
+						</code></pre>
+						<h3 class="fragment" style="text-shadow: 0.05em 0.05em #333">Turing completeness!</h3>
+					</section>
+					<section>
+						<h3>Curiously recurring template pattern</h3>
+						<pre class="fragment"><code data-trim contenteditable>
+						// The Curiously Recurring Template Pattern (CRTP)
+template&lt;class T>
+class Base
+{
+    // methods within Base can use template to access members of Derived
+};
+class Derived : public Base&lt;Derived>
+{
+    // ...
+};</code></pre>
+					</section>
+					<section>
+						<h1>C++/CLI</h1>
+						<h3 class="fragment">there are generics!</h3>
+					</section>
+					<section data-background="img/cli_generics.png"></section>
+					<section data-background="img/one-ring.jpg">
+						<h1>Java</h1>
+						<h3 class="fragment" style="text-shadow: 0.05em 0.05em #333">one to rule them all</h3>
+						<br/>
+						<p class="fragment"><i>type erasure</i></p>
+						<br/><br/><br/><br/><br/><br/>
+					</section>
+					<!--<section data-background="img/gollum.jpg">-->
+					<section data-background="img/eq.jpg">
+					<h2>Equivalent bytecodes</h2>
+					<pre><code data-trim contenteditable>
+ArrayList strs = new ArrayList();
+strs.add("hello");
+String entry = (String) strs.get(0);
+strs.add(new Object());
+					</code></pre>
+					<pre><code data-trim contenteditable>
+ArrayList&lt;String&gt; strs = new ArrayList&lt;String&gt;();
+strs.add("hello");
+String entry = strs.get(0);
+strs.add(new Object());
+					</code></pre>
+					<h5 class="fragment">but this does not compile ;-)</h5>
+					</section>
+					<section data-background="img/matrix_code.jpg">
+						<h1>Other?</h1>
+					</section>
+				</section>
+				<section>
+					<!--<section data-background="img/dbs.jpg">-->
+					<section data-background="img/cs_20.jpg">
+						<h1 style="text-shadow: 0.05em 0.05em #333">C# 2.0</h1>
+						<h4 style="text-shadow: 0.05em 0.05em #333">2005</h4>
+					</section>
+					<section data-background="img/steel.jpg">
+						<h2 style="text-shadow: 0.05em 0.05em #333">Performance</h2>
+						<ul>
+						 <li class="fragment" style="text-shadow: 0.05em 0.05em #333">value types - no un-/boxing required</li>
+						 <li class="fragment" style="text-shadow: 0.05em 0.05em #333">reference types - usually improved but only slightly</li>
+						</ul>
+					</section>
+					<section data-background="img/firemans.jpg">
+						<h2>Safety</h2>
+						<p class="fragment">static typing => compile checks</p>
+					</section>
+					<section data-background="img/bugs.jpg">
+						<h2 style="text-shadow: 0.05em 0.05em #333">Less bugs?</h2>
+					</section>
+					<section data-background="img/riddler.jpg">
+						<h2 style="text-shadow: 0.05em 0.05em #333">Expressing the intention clearly</h2>
+					</section>
+				</section>
+				<section>
+					<section data-background="img/hi_gen.png">
+						<h2 style="text-shadow: 0.05em 0.05em #333">IL representation</h2>
+
+						<pre><code data-trim contenteditable style="font-size: 24pt">
+IList&lt;int&gt; myList = new List&lt;int&gt;();
+						</code></pre>
+						<img src="img/1.png" style="position: fixed; top:512%!important; left: 170%!important; border: none; background:none; box-shadow:none;" border="0"/>
+					</section>
+				</section>
+				<section>
+					<section data-background="img/cell.jpg">
+						<h2>generic methods</h2>
+						<img src="img/2.png" style="position: fixed; top:722%!important; left: 170%!important; border: none; background:none; box-shadow:none;" border="0"/>
+					</section>
+					<section data-background="img/oculus.jpg">
+						<h3  style="text-shadow: 0.05em 0.05em #000">virtual calls on type parameter?</h3>
+						<img src="img/2.png" style="position: fixed; top:722%!important; left: 170%!important; border: none; background:none; box-shadow:none;" border="0"/>
+					</section>
+				</section>
+				<section data-background="img/neo_pill.jpg">
+					<h2>Type parameters</h2>
+					<img src="img/3.png" style="position: fixed; top:402%!important; left: 120%!important; border: none; background:none; box-shadow:none;" border="0"/>
+				</section>
+				<section data-background="img/yoda_2.png">
+					<h2>Type constraints</h2>
+					<ul>
+						<li class="fragment" style="text-shadow: 0.05em 0.05em #000">value/reference type constraint</li>
+						<li class="fragment">ctor type constraint</li>
+						<li class="fragment">conversion type constraints</li>
+					</ul>
+					<img src="img/4.png" style="position: fixed; top:172%!important; right: 99%!important; border: none; background:none; box-shadow:none;" border="0"/>
+				</section>
+				<section data-background="img/the_matrix_twins.png">
+						<pre class="fragment"><code data-trim contenteditable>
+Apple apple = new Apple();
+Fruit fruit = apple;
+fruit = new Banana();
+						</code></pre>
+						<p class="fragment">so...</p>
+						<pre class="fragment"><code data-trim contenteditable>
+Apple[] apples = new Apple[] { new Apple(), new Apple() };
+Fruit[] fruits = apples;
+						</code></pre>
+					</section>
+				<section>
+					<section data-background="img/cs_40.jpg">
+							<h1>C# 4.0</h1>
+							<h4 style="text-shadow: 0.1em 0.1em #333">2010</h4>
+					</section>
+					<section data-background="img/kamehameha.jpg">
+						<h2>Covariance</h2>
+						<pre class="fragment"><code data-trim contenteditable>
+IEnumerable&lt;Manager&gt; managers = GetManagers();
+IEnumerable&lt;Employee&gt; employees = managers;
+						</code></pre>
+					</section>
+					<section data-background="img/vegeta.jpg">
+						<h2 style="text-shadow: 0.1em 0.1em #333">Contravariance</h2>
+						<pre class="fragment"><code data-trim contenteditable>
+IComparer&lt;Employee&gt; empl = GetEmployeeComparer();
+IComparer&lt;Manager&gt; mng = empl;
+						</code></pre>
+					</section>
+				</section>
+				<section data-background="img/neo-bullets.png">
+					<h2>SUMMARY</h2>
+				</section>
+				<section data-background="white">
+					<img src="img/qa.png" style="border: none; background:none; box-shadow:none;"/>
+				</section>
+				<section>
+					<section>
+						<h3  style="font-family: Consolas; text-transform: none;">What is the difference between !T and !!T in IL?</h3>
+					</section>
+					<section>
+						<h3  style="font-family: Consolas; text-transform: none;">Will it compile?</h3>
+						<pre><code>
+						public class TestClass&lt;in T, out W> where W: T {}
+						</code></pre>
+						<h1 class="fragment">no</h1>
+					</section>
+					<section>
+						<h3  style="font-family: Consolas; text-transform: none;">What will be the full class name in IL?</h3>
+						<pre><code>
+						public interface ITestInterface&lt;in T, out W> where W: T {}
+						</code></pre>
+						<h3 class="fragment" style="font-family: monospace; text-transform: none;">ITestInterface`2<- T,+ (!T) W></h3>
+					</section>
+				</section>
+				<section data-background="img/the-end.jpg">
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
