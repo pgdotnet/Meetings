@@ -1,1 +1,2 @@
-﻿# Aspect Oriented Programming z użyciem Dynamic Proxy - Jan Polak
+﻿# Aspect Oriented Programming z użyciem Dynamic Proxy
+## Jan Polak

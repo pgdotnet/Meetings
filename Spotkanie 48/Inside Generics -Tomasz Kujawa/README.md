@@ -1,1 +1,2 @@
-﻿# Inside Generics - Tomasz Kujawa
+﻿# Inside Generics
+## Tomasz Kujawa
