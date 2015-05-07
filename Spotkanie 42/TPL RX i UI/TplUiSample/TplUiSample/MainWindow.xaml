@@ -1,0 +1,24 @@
+﻿<Window x:Class="TplUiSample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <Button Content="Background task" Click="BackgroundTask" />
+            <Button Content="Multiple tasks" Click="MultipleTasks" />
+            <Button Content="Exception handling" Click="ExceptionHandling" />
+        </StackPanel>
+        <ListBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Log}" />
+        
+        <ProgressBar Grid.Row="1" Grid.Column="1" Height="20" Name="Progress" />
+    </Grid>
+</Window>

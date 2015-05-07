@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RX_demo", "RX_demo\RX_demo.csproj", "{3304AFE5-BC6F-43EB-A928-59F0647CA885}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdpSender", "UdpSender\UdpSender.csproj", "{FBDD19BE-FE00-45B4-9E95-461EB74486B6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3304AFE5-BC6F-43EB-A928-59F0647CA885}.Debug|x86.ActiveCfg = Debug|x86
+		{3304AFE5-BC6F-43EB-A928-59F0647CA885}.Debug|x86.Build.0 = Debug|x86
+		{3304AFE5-BC6F-43EB-A928-59F0647CA885}.Release|x86.ActiveCfg = Release|x86
+		{3304AFE5-BC6F-43EB-A928-59F0647CA885}.Release|x86.Build.0 = Release|x86
+		{FBDD19BE-FE00-45B4-9E95-461EB74486B6}.Debug|x86.ActiveCfg = Debug|x86
+		{FBDD19BE-FE00-45B4-9E95-461EB74486B6}.Debug|x86.Build.0 = Debug|x86
+		{FBDD19BE-FE00-45B4-9E95-461EB74486B6}.Release|x86.ActiveCfg = Release|x86
+		{FBDD19BE-FE00-45B4-9E95-461EB74486B6}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
