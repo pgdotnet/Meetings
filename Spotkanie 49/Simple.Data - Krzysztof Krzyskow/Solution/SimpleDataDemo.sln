@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleWithMssql", "SimpleWithMssql\SimpleWithMssql.csproj", "{BA05F182-179B-4ABA-85D4-1222EDC650FB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Release-Mono|Any CPU = Release-Mono|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA05F182-179B-4ABA-85D4-1222EDC650FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA05F182-179B-4ABA-85D4-1222EDC650FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA05F182-179B-4ABA-85D4-1222EDC650FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA05F182-179B-4ABA-85D4-1222EDC650FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA05F182-179B-4ABA-85D4-1222EDC650FB}.Release-Mono|Any CPU.ActiveCfg = Release|Any CPU
+		{BA05F182-179B-4ABA-85D4-1222EDC650FB}.Release-Mono|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
