@@ -1,6 +1,6 @@
 ﻿namespace RxUiSample
 {
-	public struct ServerConfig : IChannelConfig
+	public struct ClientConfig : IChannelConfig
 	{
 		public string Address { get; set; }
 

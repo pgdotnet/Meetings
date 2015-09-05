@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace RxUiSample
+﻿namespace RxUiSample
 {
-    public interface ICustomService
-    {
-    }
+	public interface ICustomService
+	{
+	}
 }

@@ -1,59 +1,58 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net;
 using System.Reactive.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RxUiSample
 {
-    public class UdpCommunicationChannel<T> : ICommunicationChannel<T>
-    {
-        private readonly IUdpClientServer _udpClientServer;
-        private readonly ServerConfig _serverConfig;
-        
-        public UdpCommunicationChannel(IUdpClientServer udpClientServer, ServerConfig serverConfig)
-        {
-            if (!typeof(T).IsSerializable)
-                throw new ArgumentException("Given type must be serializable!", "T");
+	public class UdpCommunicationChannel<T> : ICommunicationChannel<T>
+	{
+		private readonly IUdpClientServer _udpClientServer;
+		private readonly IChannelConfig _channelConfig;
 
-            _udpClientServer = udpClientServer;
-            _serverConfig = serverConfig;
-        }
+		public UdpCommunicationChannel(IUdpClientServer udpClientServer, IChannelConfig channelConfig)
+		{
+			if (!typeof(T).IsSerializable)
+				throw new ArgumentException("Given type must be serializable!", "T");
 
-        public IObservable<T> MessageStream
-        {
-            get { return _udpClientServer.Listen(_serverConfig.Port).Select(bytes => Deserialize(bytes)); }
-        }
+			_udpClientServer = udpClientServer;
+			_channelConfig = channelConfig;
+		}
 
-        public IObservable<int> SendMessage(T message)
-        {
-            return _udpClientServer.Send(_serverConfig.Address, _serverConfig.Port, Serialize(message));
-        }
+		public IObservable<T> MessageStream
+		{
+			get { return _udpClientServer.Listen(_channelConfig.Port).Select(bytes => Deserialize(bytes)); }
+		}
 
-        private byte[] Serialize(T data)
-        {
-            object isNull = data;
-            if (isNull == null || data.Equals(default(T)))
-                return new byte[0];
+		public IObservable<int> SendMessage(T message)
+		{
+			return _udpClientServer.Send(_channelConfig.Address, _channelConfig.Port, Serialize(message));
+		}
 
-            MemoryStream stream = new MemoryStream();
-            BinaryFormatter formatter = new BinaryFormatter();
-            formatter.Serialize(stream, data);
-            return stream.ToArray();
-        }
+		private byte[] Serialize(T data)
+		{
+			object isNull = data;
+			if (isNull == null || data.Equals(default(T)))
+				return new byte[0];
 
-        private T Deserialize(byte[] bytes)
-        {
-            if (bytes == null || bytes.Length == 0)
-                return default(T);
+			using (MemoryStream stream = new MemoryStream())
+			{
+				BinaryFormatter formatter = new BinaryFormatter();
+				formatter.Serialize(stream, data);
+				return stream.ToArray();
+			}
+		}
 
-            MemoryStream stream = new MemoryStream(bytes);
-            BinaryFormatter formatter = new BinaryFormatter();
-            return (T)formatter.Deserialize(stream);
-        }
-    }
+		private T Deserialize(byte[] bytes)
+		{
+			if (bytes == null || bytes.Length == 0)
+				return default(T);
+
+			using (MemoryStream stream = new MemoryStream(bytes))
+			{
+				BinaryFormatter formatter = new BinaryFormatter();
+				return (T)formatter.Deserialize(stream);
+			}
+		}
+	}
 }
